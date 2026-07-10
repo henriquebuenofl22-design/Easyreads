@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useStore } from '../store'
 import { calcStreak, dateKey, weekActivity } from '../data'
+import ReadingCard from '../ReadingCard'
 
 function greeting(): string {
   const h = new Date().getHours()
@@ -8,7 +9,7 @@ function greeting(): string {
 }
 
 export default function Home({ onAdd }: { onAdd: () => void }) {
-  const { state, dispatch } = useStore()
+  const { state } = useStore()
   const { books, activity, profile } = state
   const reading = books.filter((b) => b.status === 'reading')
   const thisYear = new Date().getFullYear()
@@ -103,38 +104,9 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
             <div className="card hint">Nothing in progress — start one from your shelf, or add a new book.</div>
           ) : (
             <div className="reading-row">
-              {reading.map((b) => {
-                const pct = Math.round((b.currentPage / b.pages) * 100)
-                return (
-                  <motion.div key={b.id} layout className="card read-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-                    <div className="read-card-top">
-                      <span className="mini-cover" style={{ background: b.color }}>
-                        {b.title.charAt(0)}
-                      </span>
-                      <div>
-                        <div className="read-title">{b.title}</div>
-                        <div className="read-author">{b.author}</div>
-                      </div>
-                    </div>
-                    <div className="pbar">
-                      <motion.div className="pbar-fill" animate={{ width: `${pct}%` }} transition={{ type: 'spring', stiffness: 200, damping: 26 }} />
-                    </div>
-                    <div className="read-foot">
-                      <span>
-                        p. {b.currentPage} / {b.pages} · {pct}%
-                      </span>
-                      <div className="mini-btns">
-                        <button className="mini-btn" onClick={() => dispatch({ type: 'log', id: b.id, delta: 10 })}>
-                          +10 pages
-                        </button>
-                        <button className="mini-btn dark" onClick={() => dispatch({ type: 'setStatus', id: b.id, status: 'finished' })}>
-                          Finish
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              })}
+              {reading.map((b) => (
+                <ReadingCard key={b.id} book={b} />
+              ))}
             </div>
           )}
 

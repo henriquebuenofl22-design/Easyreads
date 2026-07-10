@@ -1,7 +1,7 @@
 {
   "name": "vite-temp",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "motion": "^12.42.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },

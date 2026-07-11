@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.1.0 — 2026-07-10
+
+### Changed
+- **App traduzido para português (pt-BR)**: the entire interface is now in Brazilian Portuguese — onboarding slides and CTAs, tab bar (Início / Estante / Perfil), Home dashboard (saudação "Bom dia/Boa tarde/Boa noite", metas, gráfico semanal), shelf filters (Todos / Lendo / Quero ler / Lidos), add-book and settings sheets, achievements, and all accessibility labels (aria-labels, placeholders).
+- Dates and numbers now format with the pt-BR locale (e.g. "1.234 páginas", "10 de jul."), via a single shared `APP_LOCALE` constant.
+- Weekly chart day letters follow the Portuguese convention (D S T Q Q S S) and each bar shows the full day name on hover and to screen readers.
+- The document language is `pt-BR` and the page title is "EasyReads — Acompanhe cada livro".
+
+### Fixed
+- Books and profile saved by the previous English version migrate once to the new storage format: the default name "Reader" becomes "Leitor" and "Unknown author" becomes "Autor desconhecido", without ever rewriting names the user typed themselves.
+- Corrupted saved data (non-array book lists, null entries) no longer risks wiping the library on load — invalid entries are filtered out and the previous save is kept as a backup.
+- The "Dia seguido / Dias seguidos" stat now uses the correct singular/plural form.
+- Long Portuguese labels no longer break layouts: segmented filter buttons never wrap, the profile note stays centered when it wraps, and settings rows keep a gap between text and the toggle.
+- The onboarding goal ring now shows the current year instead of a hardcoded one.
+
 ## 0.1.0.0 — 2026-07-10
 
 First release of EasyReads, a book-tracking app (Vite + React 19 + TypeScript + Bun, animated with `motion`).

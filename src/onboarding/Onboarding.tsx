@@ -7,20 +7,20 @@ type Slide = { key: string; title: string; subtitle: string; Visual: ComponentTy
 const SLIDES: Slide[] = [
   {
     key: 'scan',
-    title: 'Track every book, effortlessly',
-    subtitle: 'Snap a cover or scan the ISBN — pages, author and edition are logged for you in seconds.',
+    title: 'Acompanhe cada livro, sem esforço',
+    subtitle: 'Fotografe a capa ou escaneie o ISBN — páginas, autor e edição são registrados para você em segundos.',
     Visual: ScanVisual,
   },
   {
     key: 'streak',
-    title: 'Build a habit that actually sticks',
-    subtitle: 'Daily page goals, gentle nudges and streaks that make picking the book back up irresistible.',
+    title: 'Crie um hábito que realmente dura',
+    subtitle: 'Metas diárias de páginas, lembretes gentis e sequências que tornam irresistível voltar ao livro.',
     Visual: StreakVisual,
   },
   {
     key: 'goal',
-    title: 'Turn pages into progress',
-    subtitle: 'Set a yearly goal, watch your stats climb, and celebrate every finished chapter.',
+    title: 'Transforme páginas em progresso',
+    subtitle: 'Defina uma meta anual, veja suas estatísticas subirem e celebre cada capítulo concluído.',
     Visual: GoalVisual,
   },
 ]
@@ -49,7 +49,7 @@ export default function Onboarding({ onFinish }: { onFinish: (mode: 'signup' | '
           onClick={() => go(index - 1)}
           animate={{ opacity: index > 0 ? 1 : 0, scale: index > 0 ? 1 : 0.8 }}
           style={{ pointerEvents: index > 0 ? 'auto' : 'none' }}
-          aria-label="Back"
+          aria-label="Voltar"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -72,7 +72,7 @@ export default function Onboarding({ onFinish }: { onFinish: (mode: 'signup' | '
           onClick={() => go(SLIDES.length - 1)}
           style={{ visibility: last ? 'hidden' : 'visible' }}
         >
-          Skip
+          Pular
         </button>
       </header>
 
@@ -130,10 +130,10 @@ export default function Onboarding({ onFinish }: { onFinish: (mode: 'signup' | '
               transition={{ duration: 0.2 }}
             >
               <motion.button className="cta" whileTap={{ scale: 0.97 }} onClick={() => onFinish('signup')}>
-                Get started
+                Começar
               </motion.button>
               <button className="ghost" onClick={() => onFinish('guest')}>
-                Continue as guest
+                Continuar como visitante
               </button>
             </motion.div>
           ) : (
@@ -146,7 +146,7 @@ export default function Onboarding({ onFinish }: { onFinish: (mode: 'signup' | '
               transition={{ duration: 0.2 }}
             >
               <motion.button className="cta" whileTap={{ scale: 0.97 }} onClick={() => go(index + 1)}>
-                Continue
+                Continuar
               </motion.button>
             </motion.div>
           )}

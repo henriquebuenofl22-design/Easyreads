@@ -38,9 +38,9 @@ function UserIcon() {
 }
 
 const TABS = [
-  { key: 'home', label: 'Home', Icon: HomeIcon },
-  { key: 'shelf', label: 'Shelf', Icon: ShelfIcon },
-  { key: 'profile', label: 'Profile', Icon: UserIcon },
+  { key: 'home', label: 'Início', Icon: HomeIcon },
+  { key: 'shelf', label: 'Estante', Icon: ShelfIcon },
+  { key: 'profile', label: 'Perfil', Icon: UserIcon },
 ] as const
 
 type TabKey = (typeof TABS)[number]['key']
@@ -73,7 +73,7 @@ export default function AppShell({
         </motion.div>
       </AnimatePresence>
 
-      <motion.button className="fab" whileTap={{ scale: 0.88 }} onClick={() => setAdding(true)} aria-label="Add a book">
+      <motion.button className="fab" whileTap={{ scale: 0.88 }} onClick={() => setAdding(true)} aria-label="Adicionar um livro">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
         </svg>

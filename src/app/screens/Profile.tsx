@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { useStore } from '../store'
-import { calcStreak, dateKey } from '../data'
+import { APP_LOCALE, calcStreak, dateKey } from '../data'
 
 export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings: () => void; onSignOut: () => void }) {
   const { state, dispatch } = useStore()
@@ -15,26 +15,26 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
   const streak = calcStreak(activity)
 
   const achievements = [
-    { emoji: '📕', name: 'First book', done: books.length >= 1 },
-    { emoji: '📚', name: '5 on shelf', done: books.length >= 5 },
-    { emoji: '✅', name: 'Finisher', done: finished >= 1 },
-    { emoji: '🏆', name: '5 finished', done: finished >= 5 },
-    { emoji: '📖', name: '1k pages', done: pagesRead >= 1000 },
-    { emoji: '🔥', name: '3-day streak', done: streak >= 3 },
+    { emoji: '📕', name: 'Primeiro livro', done: books.length >= 1 },
+    { emoji: '📚', name: '5 na estante', done: books.length >= 5 },
+    { emoji: '✅', name: 'Finalizador', done: finished >= 1 },
+    { emoji: '🏆', name: '5 concluídos', done: finished >= 5 },
+    { emoji: '📖', name: '1 mil páginas', done: pagesRead >= 1000 },
+    { emoji: '🔥', name: '3 dias seguidos', done: streak >= 3 },
   ]
 
   const stats = [
-    { num: finished, label: 'Books finished' },
-    { num: pagesRead.toLocaleString(), label: 'Pages read' },
-    { num: streak, label: 'Day streak' },
-    { num: reading, label: 'Reading now' },
+    { num: finished, label: 'Livros concluídos' },
+    { num: pagesRead.toLocaleString(APP_LOCALE), label: 'Páginas lidas' },
+    { num: streak, label: streak === 1 ? 'Dia seguido' : 'Dias seguidos' },
+    { num: reading, label: 'Lendo agora' },
   ]
 
   const todayPages = state.activity[dateKey(new Date())] ?? 0
 
   return (
     <>
-      <button className="settings-btn" onClick={onOpenSettings} aria-label="Settings">
+      <button className="settings-btn" onClick={onOpenSettings} aria-label="Configurações">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
           <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="2" />
           <path
@@ -52,10 +52,10 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
           className="name-input"
           value={profile.name}
           onChange={(e) => dispatch({ type: 'profile', patch: { name: e.target.value } })}
-          placeholder="Your name"
-          aria-label="Your name"
+          placeholder="Seu nome"
+          aria-label="Seu nome"
         />
-        <span className="member-note">EasyReads guest · tap your name to edit</span>
+        <span className="member-note">Visitante do EasyReads · toque no seu nome para editar</span>
       </div>
 
       <div className="stat-grid">
@@ -69,17 +69,17 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
 
       <div className="card goal-row">
         <div>
-          <div className="read-title">{thisYear} goal</div>
+          <div className="read-title">Meta de {thisYear}</div>
           <div className="read-author">
-            {finishedThisYear} of {profile.goal} books
+            {finishedThisYear} de {profile.goal} livros
           </div>
         </div>
         <div className="stepper">
-          <button className="step-btn" onClick={() => dispatch({ type: 'profile', patch: { goal: Math.max(1, profile.goal - 1) } })} aria-label="Decrease goal">
+          <button className="step-btn" onClick={() => dispatch({ type: 'profile', patch: { goal: Math.max(1, profile.goal - 1) } })} aria-label="Diminuir meta">
             −
           </button>
           <span className="step-val">{profile.goal}</span>
-          <button className="step-btn" onClick={() => dispatch({ type: 'profile', patch: { goal: Math.min(200, profile.goal + 1) } })} aria-label="Increase goal">
+          <button className="step-btn" onClick={() => dispatch({ type: 'profile', patch: { goal: Math.min(200, profile.goal + 1) } })} aria-label="Aumentar meta">
             +
           </button>
         </div>
@@ -87,9 +87,9 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
 
       <div className="card goal-row">
         <div>
-          <div className="read-title">Daily goal {todayPages >= profile.dailyGoal && '✅'}</div>
+          <div className="read-title">Meta diária {todayPages >= profile.dailyGoal && '✅'}</div>
           <div className="read-author">
-            {todayPages} of {profile.dailyGoal} pages today
+            {todayPages} de {profile.dailyGoal} páginas hoje
           </div>
         </div>
         <div className="goal-row-bar">
@@ -104,9 +104,9 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
       </div>
 
       <div className="sec">
-        <h3>Achievements</h3>
+        <h3>Conquistas</h3>
         <span>
-          {achievements.filter((a) => a.done).length} of {achievements.length}
+          {achievements.filter((a) => a.done).length} de {achievements.length}
         </span>
       </div>
       <div className="ach-grid">
@@ -125,7 +125,7 @@ export default function Profile({ onOpenSettings, onSignOut }: { onOpenSettings:
       </div>
 
       <button className="signout wide" onClick={onSignOut}>
-        Sign out
+        Sair
       </button>
     </>
   )

@@ -34,28 +34,28 @@ export default function SettingsSheet({
         transition={{ type: 'spring', stiffness: 340, damping: 34 }}
       >
         <div className="sheet-handle" />
-        <h3>Settings</h3>
+        <h3>Configurações</h3>
         <div className="settings-list">
           <div className="field">
-            <label htmlFor="set-name">Your name</label>
+            <label htmlFor="set-name">Seu nome</label>
             <input
               id="set-name"
               value={profile.name}
               onChange={(e) => dispatch({ type: 'profile', patch: { name: e.target.value } })}
-              placeholder="Your name"
+              placeholder="Seu nome"
             />
           </div>
 
           <div className="card goal-row">
             <div>
-              <div className="read-title">Daily reading goal</div>
-              <div className="read-author">{profile.dailyGoal} pages a day</div>
+              <div className="read-title">Meta diária de leitura</div>
+              <div className="read-author">{profile.dailyGoal} páginas por dia</div>
             </div>
             <div className="stepper">
               <button
                 className="step-btn"
                 onClick={() => dispatch({ type: 'profile', patch: { dailyGoal: Math.max(5, profile.dailyGoal - 5) } })}
-                aria-label="Decrease daily goal"
+                aria-label="Diminuir meta diária"
               >
                 −
               </button>
@@ -63,7 +63,7 @@ export default function SettingsSheet({
               <button
                 className="step-btn"
                 onClick={() => dispatch({ type: 'profile', patch: { dailyGoal: Math.min(200, profile.dailyGoal + 5) } })}
-                aria-label="Increase daily goal"
+                aria-label="Aumentar meta diária"
               >
                 +
               </button>
@@ -72,14 +72,14 @@ export default function SettingsSheet({
 
           <div className="card goal-row">
             <div>
-              <div className="read-title">Yearly book goal</div>
-              <div className="read-author">{profile.goal} books in {new Date().getFullYear()}</div>
+              <div className="read-title">Meta anual de livros</div>
+              <div className="read-author">{profile.goal} livros em {new Date().getFullYear()}</div>
             </div>
             <div className="stepper">
               <button
                 className="step-btn"
                 onClick={() => dispatch({ type: 'profile', patch: { goal: Math.max(1, profile.goal - 1) } })}
-                aria-label="Decrease yearly goal"
+                aria-label="Diminuir meta anual"
               >
                 −
               </button>
@@ -87,7 +87,7 @@ export default function SettingsSheet({
               <button
                 className="step-btn"
                 onClick={() => dispatch({ type: 'profile', patch: { goal: Math.min(200, profile.goal + 1) } })}
-                aria-label="Increase yearly goal"
+                aria-label="Aumentar meta anual"
               >
                 +
               </button>
@@ -96,18 +96,18 @@ export default function SettingsSheet({
 
           <div className="card goal-row">
             <div>
-              <div className="read-title">Daily reminder</div>
-              <div className="read-author">A nudge to hit your page goal</div>
+              <div className="read-title">Lembrete diário</div>
+              <div className="read-author">Um empurrãozinho para bater sua meta de páginas</div>
             </div>
             <Toggle on={profile.reminders} onToggle={() => dispatch({ type: 'profile', patch: { reminders: !profile.reminders } })} />
           </div>
 
           <button className="ghost" onClick={onReplayIntro}>
-            Replay intro
+            Rever introdução
           </button>
 
           <button className="signout" onClick={onSignOut}>
-            Sign out
+            Sair
           </button>
 
           <button
@@ -122,7 +122,7 @@ export default function SettingsSheet({
               onClose()
             }}
           >
-            {confirmClear ? 'Tap again to erase everything' : 'Clear all data'}
+            {confirmClear ? 'Toque de novo para apagar tudo' : 'Apagar todos os dados'}
           </button>
         </div>
       </motion.div>

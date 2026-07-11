@@ -1,3 +1,5 @@
+export const APP_LOCALE = 'pt-BR'
+
 export type BookStatus = 'reading' | 'want' | 'finished'
 
 export interface Book {
@@ -29,7 +31,7 @@ export interface State {
 export const initialState: State = {
   books: [],
   activity: {},
-  profile: { name: 'Reader', goal: 30, dailyGoal: 20, reminders: true },
+  profile: { name: 'Leitor', goal: 30, dailyGoal: 20, reminders: true },
 }
 
 const COVER_COLORS = ['#4e6b5d', '#91605f', '#4a5d79', '#7a5c8c', '#a8762e', '#3f7570']
@@ -55,14 +57,16 @@ export function calcStreak(activity: Record<string, number>): number {
   return streak
 }
 
-const DAY_LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+// indexed by getDay(): dom seg ter qua qui sex sáb
+const DAY_LETTERS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+const DAY_NAMES = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado']
 
 export function weekActivity(activity: Record<string, number>) {
-  const out: { key: string; label: string; pages: number }[] = []
+  const out: { key: string; label: string; name: string; pages: number }[] = []
   for (let i = 6; i >= 0; i--) {
     const d = new Date()
     d.setDate(d.getDate() - i)
-    out.push({ key: dateKey(d), label: DAY_LETTERS[d.getDay()], pages: activity[dateKey(d)] ?? 0 })
+    out.push({ key: dateKey(d), label: DAY_LETTERS[d.getDay()], name: DAY_NAMES[d.getDay()], pages: activity[dateKey(d)] ?? 0 })
   }
   return out
 }

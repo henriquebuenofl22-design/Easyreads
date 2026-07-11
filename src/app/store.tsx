@@ -74,7 +74,13 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-const STORAGE_KEY = 'easyreads:v1'
+const STORAGE_KEY = 'easyreads:v2'
+// v1 is the pre-translation schema; kept in place as a recovery backup after migration
+const LEGACY_STORAGE_KEY = 'easyreads:v1'
+
+function sanitizeBooks(books: unknown): Book[] {
+  return (Array.isArray(books) ? books : []).filter((b): b is Book => !!b && typeof b === 'object')
+}
 
 function load(): State {
   try {
@@ -84,7 +90,25 @@ function load(): State {
       return {
         ...initialState,
         ...parsed,
+        books: sanitizeBooks(parsed.books),
         profile: { ...initialState.profile, ...parsed.profile },
+      }
+    }
+    const legacy = localStorage.getItem(LEGACY_STORAGE_KEY)
+    if (legacy) {
+      const parsed = JSON.parse(legacy) as Partial<State>
+      // one-time migration of app-supplied English defaults persisted by v1 builds;
+      // the result is saved under STORAGE_KEY, so user-typed values are never rewritten again
+      const books = sanitizeBooks(parsed.books).map((b) =>
+        b.author === 'Unknown author' ? { ...b, author: 'Autor desconhecido' } : b,
+      )
+      const profile = { ...initialState.profile, ...parsed.profile }
+      if (profile.name === 'Reader') profile.name = 'Leitor'
+      return {
+        ...initialState,
+        ...parsed,
+        books,
+        profile,
       }
     }
   } catch {

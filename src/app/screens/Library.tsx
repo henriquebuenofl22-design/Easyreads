@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useStore } from '../store'
-import type { Book } from '../data'
+import { APP_LOCALE, type Book } from '../data'
 
 const FILTERS = [
-  { key: 'all', label: 'All' },
-  { key: 'reading', label: 'Reading' },
-  { key: 'want', label: 'Want' },
-  { key: 'finished', label: 'Done' },
+  { key: 'all', label: 'Todos' },
+  { key: 'reading', label: 'Lendo' },
+  { key: 'want', label: 'Quero ler' },
+  { key: 'finished', label: 'Lidos' },
 ] as const
 
 type FilterKey = (typeof FILTERS)[number]['key']
@@ -21,7 +21,7 @@ function Stars({ book }: { book: Book }) {
           key={n}
           className={`star ${(book.rating ?? 0) >= n ? 'on' : ''}`}
           onClick={() => dispatch({ type: 'rate', id: book.id, rating: n })}
-          aria-label={`Rate ${n} stars`}
+          aria-label={`Avaliar com ${n} estrelas`}
         >
           ★
         </button>
@@ -38,8 +38,8 @@ export default function Library({ onAdd }: { onAdd: () => void }) {
   return (
     <>
       <div className="screen-head">
-        <h2>My shelf</h2>
-        <span>{state.books.length} books</span>
+        <h2>Minha estante</h2>
+        <span>{state.books.length} livros</span>
       </div>
 
       <div className="segmentbar">
@@ -54,11 +54,11 @@ export default function Library({ onAdd }: { onAdd: () => void }) {
       {books.length === 0 ? (
         <div className="card empty">
           <span className="empty-emoji">🔍</span>
-          <h3>Nothing here yet</h3>
-          <p>{state.books.length === 0 ? 'Register a book by name to start your shelf.' : 'No books match this filter.'}</p>
+          <h3>Nada por aqui ainda</h3>
+          <p>{state.books.length === 0 ? 'Cadastre um livro pelo nome para começar sua estante.' : 'Nenhum livro corresponde a este filtro.'}</p>
           {state.books.length === 0 && (
             <button className="cta" onClick={onAdd}>
-              Add a book
+              Adicionar um livro
             </button>
           )}
         </div>
@@ -95,16 +95,16 @@ export default function Library({ onAdd }: { onAdd: () => void }) {
                           +10
                         </button>
                         <button className="mini-btn dark" onClick={() => dispatch({ type: 'setStatus', id: b.id, status: 'finished' })}>
-                          Finish
+                          Concluir
                         </button>
                       </div>
                     </>
                   )}
                   {b.status === 'want' && (
                     <div className="row-actions">
-                      <span className="row-meta">{b.pages} pages</span>
+                      <span className="row-meta">{b.pages} páginas</span>
                       <button className="mini-btn dark" onClick={() => dispatch({ type: 'setStatus', id: b.id, status: 'reading' })}>
-                        Start reading
+                        Começar a ler
                       </button>
                     </div>
                   )}
@@ -113,13 +113,13 @@ export default function Library({ onAdd }: { onAdd: () => void }) {
                       <Stars book={b} />
                       {b.finishedAt && (
                         <span className="row-meta">
-                          {new Date(b.finishedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                          {new Date(b.finishedAt).toLocaleDateString(APP_LOCALE, { month: 'short', day: 'numeric' })}
                         </span>
                       )}
                     </div>
                   )}
                 </div>
-                <button className="del" onClick={() => dispatch({ type: 'remove', id: b.id })} aria-label={`Remove ${b.title}`}>
+                <button className="del" onClick={() => dispatch({ type: 'remove', id: b.id })} aria-label={`Remover ${b.title}`}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
                   </svg>

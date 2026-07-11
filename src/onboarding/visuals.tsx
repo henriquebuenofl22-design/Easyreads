@@ -56,8 +56,8 @@ export function ScanVisual() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay: 0.05, type: 'spring', stiffness: 200, damping: 22 }}
       >
-        <span className="book-kicker">A NOVEL</span>
-        <span className="book-title">The Midnight Library</span>
+        <span className="book-kicker">UM ROMANCE</span>
+        <span className="book-title">A Biblioteca da Meia-Noite</span>
         <span className="book-author">MATT HAIG</span>
         <motion.div
           className="scanline"
@@ -77,8 +77,8 @@ export function ScanVisual() {
           </svg>
         </span>
         <span>
-          <span className="result-title">The Midnight Library</span>
-          <span className="result-meta">Matt Haig · 304 pages</span>
+          <span className="result-title">A Biblioteca da Meia-Noite</span>
+          <span className="result-meta">Matt Haig · 304 páginas</span>
         </span>
       </motion.div>
     </div>
@@ -87,14 +87,15 @@ export function ScanVisual() {
 
 /* ---------- Slide 2: streaks and weekly rhythm ---------- */
 
+// Monday-first display order: seg ter qua qui sex sáb dom
 const WEEK = [
-  { d: 'M', s: 'done' },
+  { d: 'S', s: 'done' },
   { d: 'T', s: 'done' },
-  { d: 'W', s: 'done' },
-  { d: 'T', s: 'done' },
-  { d: 'F', s: 'done' },
+  { d: 'Q', s: 'done' },
+  { d: 'Q', s: 'done' },
+  { d: 'S', s: 'done' },
   { d: 'S', s: 'today' },
-  { d: 'S', s: 'future' },
+  { d: 'D', s: 'future' },
 ] as const
 
 export function StreakVisual() {
@@ -118,7 +119,7 @@ export function StreakVisual() {
         <span className="streak-num">
           <Counter to={12} delay={0.4} />
         </span>
-        day streak
+        dias seguidos
       </div>
       <div className="week-card">
         {WEEK.map((w, i) => (
@@ -164,7 +165,7 @@ const CONFETTI = [
   { x: -30, y: -116, c: '#f97316', delay: 1.5 },
 ]
 
-const CHIPS = ['🔥 12-day streak', '⏱ 8h 24m this month', '📖 6,120 pages']
+const CHIPS = ['🔥 12 dias seguidos', '⏱ 8h 24m neste mês', '📖 6.120 páginas']
 
 export function GoalVisual() {
   return (
@@ -206,7 +207,7 @@ export function GoalVisual() {
           <span className="ring-num">
             <Counter to={24} delay={0.35} duration={1.4} />
           </span>
-          <span className="ring-sub">of 30 books in 2026</span>
+          <span className="ring-sub">de 30 livros em {new Date().getFullYear()}</span>
         </div>
       </div>
       <div className="chips">

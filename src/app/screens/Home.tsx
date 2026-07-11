@@ -1,10 +1,10 @@
 import { motion } from 'motion/react'
 import { useStore } from '../store'
-import { calcStreak, dateKey, weekActivity } from '../data'
+import { APP_LOCALE, calcStreak, dateKey, weekActivity } from '../data'
 
 function greeting(): string {
   const h = new Date().getHours()
-  return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'
+  return h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite'
 }
 
 export default function Home({ onAdd }: { onAdd: () => void }) {
@@ -56,12 +56,12 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
         </div>
         <div className="goal-info">
           <h3>
-            {finished.length} of {profile.goal} books
+            {finished.length} de {profile.goal} livros
           </h3>
-          <p>{new Date().getFullYear()} reading goal</p>
+          <p>Meta de leitura de {new Date().getFullYear()}</p>
           <div className="goal-chips">
-            <span>📖 {pagesRead.toLocaleString()} pages</span>
-            <span>📚 {books.length} on shelf</span>
+            <span>📖 {pagesRead.toLocaleString(APP_LOCALE)} páginas</span>
+            <span>📚 {books.length} na estante</span>
           </div>
         </div>
       </div>
@@ -69,9 +69,9 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
       <div className={`card today-card ${dailyDone ? 'done' : ''}`}>
         <span className="today-emoji">{dailyDone ? '🏆' : '🎯'}</span>
         <div className="today-info">
-          <div className="read-title">{dailyDone ? 'Daily goal complete!' : 'Today’s goal'}</div>
+          <div className="read-title">{dailyDone ? 'Meta diária concluída!' : 'Meta de hoje'}</div>
           <div className="read-author">
-            {todayPages} of {profile.dailyGoal} pages
+            {todayPages} de {profile.dailyGoal} páginas
           </div>
           <div className="pbar slim">
             <motion.div
@@ -87,20 +87,20 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
       {books.length === 0 ? (
         <div className="card empty">
           <span className="empty-emoji">📚</span>
-          <h3>Your shelf is empty</h3>
-          <p>Register the book you’re reading and watch your progress grow.</p>
+          <h3>Sua estante está vazia</h3>
+          <p>Cadastre o livro que você está lendo e veja seu progresso crescer.</p>
           <button className="cta" onClick={onAdd}>
-            Add your first book
+            Adicione seu primeiro livro
           </button>
         </div>
       ) : (
         <>
           <div className="sec">
-            <h3>Currently reading</h3>
-            <span>{reading.length} in progress</span>
+            <h3>Lendo agora</h3>
+            <span>{reading.length} em andamento</span>
           </div>
           {reading.length === 0 ? (
-            <div className="card hint">Nothing in progress — start one from your shelf, or add a new book.</div>
+            <div className="card hint">Nada em andamento — comece um livro da sua estante ou adicione um novo.</div>
           ) : (
             <div className="reading-row">
               {reading.map((b) => {
@@ -125,10 +125,10 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
                       </span>
                       <div className="mini-btns">
                         <button className="mini-btn" onClick={() => dispatch({ type: 'log', id: b.id, delta: 10 })}>
-                          +10 pages
+                          +10 páginas
                         </button>
                         <button className="mini-btn dark" onClick={() => dispatch({ type: 'setStatus', id: b.id, status: 'finished' })}>
-                          Finish
+                          Concluir
                         </button>
                       </div>
                     </div>
@@ -139,13 +139,13 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
           )}
 
           <div className="sec">
-            <h3>This week</h3>
-            <span>{week.reduce((a, w) => a + w.pages, 0)} pages</span>
+            <h3>Esta semana</h3>
+            <span>{week.reduce((a, w) => a + w.pages, 0)} páginas</span>
           </div>
           <div className="card chart-card">
             <div className="bars">
               {week.map((w) => (
-                <div className="bar-col" key={w.key}>
+                <div className="bar-col" key={w.key} title={w.name} aria-label={`${w.name}: ${w.pages} páginas`}>
                   <motion.div
                     className={`bar ${w.pages === 0 ? 'zero' : ''}`}
                     initial={{ height: '4px' }}
@@ -161,8 +161,8 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
           {finished.length > 0 && (
             <>
               <div className="sec">
-                <h3>Finished</h3>
-                <span>{finished.length} this year</span>
+                <h3>Concluídos</h3>
+                <span>{finished.length} este ano</span>
               </div>
               <div className="done-row">
                 {finished.map((b) => (

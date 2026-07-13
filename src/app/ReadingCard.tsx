@@ -4,10 +4,12 @@ import { useStore } from './store'
 import type { Book } from './data'
 
 const QUICK = [5, 10, 25]
+const DEFAULT_AMOUNT = '10'
+const MINUTES_PER_PAGE = 1.5
 const spring = { type: 'spring', stiffness: 260, damping: 24 } as const
 
 function timeLeft(pagesLeft: number): string {
-  const mins = Math.round(pagesLeft * 1.5)
+  const mins = Math.round(pagesLeft * MINUTES_PER_PAGE)
   if (mins < 60) return `≈ ${mins} min left`
   const h = Math.floor(mins / 60)
   const m = mins % 60
@@ -16,7 +18,7 @@ function timeLeft(pagesLeft: number): string {
 
 export default function ReadingCard({ book }: { book: Book }) {
   const { dispatch } = useStore()
-  const [amountStr, setAmountStr] = useState('10')
+  const [amountStr, setAmountStr] = useState(DEFAULT_AMOUNT)
   const [editingPage, setEditingPage] = useState(false)
   const [pageDraft, setPageDraft] = useState('')
   const [pop, setPop] = useState<{ key: number; delta: number } | null>(null)
@@ -41,11 +43,18 @@ export default function ReadingCard({ book }: { book: Book }) {
     setEditingPage(false)
     const n = parseInt(pageDraft, 10)
     if (Number.isNaN(n)) return
-    log(Math.min(book.pages, Math.max(0, n)) - book.currentPage)
+    log(n - book.currentPage)
   }
 
   return (
-    <motion.div layout className="player-card" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={spring}>
+    <motion.div
+      layout
+      className="player-card"
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.92 }}
+      transition={spring}
+    >
       <div className="player-glow" style={{ background: book.color }} />
 
       <div className="player-top">
@@ -147,7 +156,7 @@ export default function ReadingCard({ book }: { book: Book }) {
             inputMode="numeric"
             value={amountStr}
             onChange={(e) => setAmountStr(e.target.value.replace(/\D/g, '').slice(0, 4))}
-            onBlur={() => amountStr === '' && setAmountStr('10')}
+            placeholder="0"
             aria-label="Pages to log"
           />
           <span className="amount-label">pages</span>

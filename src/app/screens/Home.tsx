@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { AnimatePresence, motion } from 'motion/react'
 import { useStore } from '../store'
 import { calcStreak, dateKey, weekActivity } from '../data'
 import ReadingCard from '../ReadingCard'
@@ -38,12 +38,12 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
       <div className="card goal-card">
         <div className="goal-ring">
           <svg width="92" height="92" viewBox="0 0 92 92">
-            <circle cx="46" cy="46" r="38" stroke="#f1f2f5" strokeWidth="9" fill="none" />
+            <circle cx="46" cy="46" r="38" stroke="rgba(255, 255, 255, 0.09)" strokeWidth="9" fill="none" />
             <motion.circle
               cx="46"
               cy="46"
               r="38"
-              stroke="#f59e0b"
+              stroke="#f8991c"
               strokeWidth="9"
               strokeLinecap="round"
               fill="none"
@@ -104,9 +104,11 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
             <div className="card hint">Nothing in progress — start one from your shelf, or add a new book.</div>
           ) : (
             <div className="reading-row">
-              {reading.map((b) => (
-                <ReadingCard key={b.id} book={b} />
-              ))}
+              <AnimatePresence mode="popLayout" initial={false}>
+                {reading.map((b) => (
+                  <ReadingCard key={b.id} book={b} />
+                ))}
+              </AnimatePresence>
             </div>
           )}
 

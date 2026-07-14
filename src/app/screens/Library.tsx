@@ -91,6 +91,14 @@ export default function Library({ onAdd }: { onAdd: () => void }) {
                         <span className="row-meta">
                           p. {b.currentPage} / {b.pages}
                         </span>
+                        <button
+                          className="mini-btn"
+                          onClick={() => dispatch({ type: 'log', id: b.id, delta: -10 })}
+                          disabled={b.currentPage === 0}
+                          aria-label="Take out 10 pages"
+                        >
+                          −10
+                        </button>
                         <button className="mini-btn" onClick={() => dispatch({ type: 'log', id: b.id, delta: 10 })}>
                           +10
                         </button>

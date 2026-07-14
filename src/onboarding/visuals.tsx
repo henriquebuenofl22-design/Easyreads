@@ -183,11 +183,11 @@ export function GoalVisual() {
         <svg width="210" height="210" viewBox="0 0 210 210">
           <defs>
             <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#fbbf24" />
-              <stop offset="100%" stopColor="#f97316" />
+              <stop offset="0%" stopColor="#ffb54d" />
+              <stop offset="100%" stopColor="#f8991c" />
             </linearGradient>
           </defs>
-          <circle cx="105" cy="105" r="88" stroke="#f1f2f5" strokeWidth="17" fill="none" />
+          <circle cx="105" cy="105" r="88" stroke="rgba(255, 255, 255, 0.09)" strokeWidth="17" fill="none" />
           <motion.circle
             cx="105"
             cy="105"

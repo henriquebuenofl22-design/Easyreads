@@ -1,8 +1,16 @@
 :root {
-  --ink: #101114;
-  --sub: #787c86;
-  --line: #ececf0;
-  --accent: #f59e0b;
+  /* Audible-inspired dark theme — see DESIGN.md */
+  --ink: #f5f6fa;
+  --sub: #9aa0ad;
+  --line: rgba(255, 255, 255, 0.08);
+  --accent: #f8991c;
+  --bg: #0e1016;
+  --card: #181b25;
+  --raise: rgba(255, 255, 255, 0.08);
+  --audible: #f8991c;
+  --audible-soft: #ffb54d;
+  --player-sub: #9aa0ad;
+  --player-line: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -19,7 +27,7 @@ body,
 
 body {
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
-  background: #e9e9ee;
+  background: #060709;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
@@ -35,7 +43,8 @@ button {
 .app {
   width: min(430px, 100vw);
   height: 100dvh;
-  background: #fff;
+  background: var(--bg);
+  color: var(--ink);
   position: relative;
   overflow: hidden;
 }
@@ -44,8 +53,8 @@ button {
   .app {
     height: min(860px, 94dvh);
     border-radius: 40px;
-    border: 1px solid #dcdce2;
-    box-shadow: 0 32px 80px -24px rgba(16, 17, 20, 0.35);
+    border: 1px solid #262a36;
+    box-shadow: 0 32px 80px -24px rgba(0, 0, 0, 0.85);
   }
 }
 
@@ -59,7 +68,7 @@ button {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(120% 55% at 50% -8%, #fff6e8 0%, #ffffff 60%);
+  background: radial-gradient(120% 55% at 50% -8%, rgba(248, 153, 28, 0.14) 0%, var(--bg) 60%);
 }
 
 .onb-top {
@@ -74,7 +83,7 @@ button {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: #f2f2f5;
+  background: var(--raise);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -100,7 +109,7 @@ button {
   height: 100%;
   width: 100%;
   border-radius: 99px;
-  background: var(--ink);
+  background: var(--audible);
   transform-origin: left;
 }
 
@@ -181,7 +190,7 @@ button {
   height: 7px;
   width: 7px;
   border-radius: 99px;
-  background: #d9dadf;
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .cta {
@@ -189,12 +198,12 @@ button {
   height: 56px;
   border-radius: 999px;
   border: none;
-  background: var(--ink);
-  color: #fff;
+  background: linear-gradient(160deg, var(--audible-soft), var(--audible));
+  color: #16181f;
   font-size: 16.5px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 28px -10px rgba(16, 17, 20, 0.5);
+  box-shadow: 0 12px 28px -10px rgba(248, 153, 28, 0.55);
 }
 
 .cta-col {
@@ -295,15 +304,15 @@ button {
   height: 3px;
   border-radius: 99px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  box-shadow: 0 0 14px 3px rgba(245, 158, 11, 0.45);
+  box-shadow: 0 0 14px 3px rgba(248, 153, 28, 0.45);
 }
 
 .scan-result {
   position: absolute;
   right: -18px;
   bottom: -6px;
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 16px;
   padding: 11px 14px;
   display: flex;
@@ -348,7 +357,7 @@ button {
   width: 118px;
   height: 118px;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 38%, #fff3dc, #ffe4b8);
+  background: radial-gradient(circle at 50% 38%, rgba(248, 153, 28, 0.35), rgba(248, 153, 28, 0.08));
   display: grid;
   place-items: center;
   position: relative;
@@ -358,12 +367,12 @@ button {
   position: absolute;
   inset: -14px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(248, 153, 28, 0.35), transparent 70%);
 }
 
 .flame {
   font-size: 54px;
-  filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.55));
+  filter: drop-shadow(0 6px 16px rgba(248, 153, 28, 0.55));
   z-index: 1;
 }
 
@@ -384,13 +393,13 @@ button {
 }
 
 .week-card {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 14px 16px;
   display: flex;
   gap: 10px;
-  box-shadow: 0 16px 36px -18px rgba(16, 17, 20, 0.25);
+  box-shadow: 0 16px 36px -18px rgba(0, 0, 0, 0.6);
 }
 
 .day {
@@ -403,7 +412,7 @@ button {
 .day-label {
   font-size: 10.5px;
   font-weight: 700;
-  color: #b6b9c1;
+  color: #6d7280;
 }
 
 .day-pip {
@@ -415,7 +424,7 @@ button {
 }
 
 .day-pip.done {
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  background: linear-gradient(180deg, var(--audible-soft), var(--audible));
 }
 
 .day-pip.today {
@@ -424,7 +433,7 @@ button {
 }
 
 .day-pip.future {
-  background: #f3f4f6;
+  background: var(--raise);
 }
 
 /* ---------- Slide 3: goal ---------- */
@@ -485,13 +494,13 @@ button {
 }
 
 .chip {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 14px;
   font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 10px 24px -14px rgba(16, 17, 20, 0.25);
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.5);
 }
 
 /* ---------- App shell ---------- */
@@ -499,7 +508,7 @@ button {
 .shell {
   height: 100%;
   position: relative;
-  background: #fafafa;
+  background: var(--bg);
   overflow: hidden;
 }
 
@@ -516,9 +525,9 @@ button {
   right: 0;
   bottom: 0;
   height: calc(64px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(14, 16, 22, 0.88);
   backdrop-filter: blur(16px);
-  border-top: 1px solid #f0f0f3;
+  border-top: 1px solid var(--line);
   display: flex;
   padding: 0 12px env(safe-area-inset-bottom);
   z-index: 20;
@@ -533,7 +542,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  color: #b0b3bb;
+  color: #6d7280;
   cursor: pointer;
   font-size: 10.5px;
   font-weight: 700;
@@ -550,7 +559,7 @@ button {
   width: 4px;
   height: 4px;
   border-radius: 99px;
-  background: var(--ink);
+  background: var(--audible);
 }
 
 .fab {
@@ -560,12 +569,12 @@ button {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  background: linear-gradient(160deg, var(--audible-soft), var(--audible));
+  color: #16181f;
   border: none;
   display: grid;
   place-items: center;
-  box-shadow: 0 16px 32px -8px rgba(16, 17, 20, 0.5);
+  box-shadow: 0 16px 32px -8px rgba(248, 153, 28, 0.55);
   cursor: pointer;
   z-index: 21;
 }
@@ -573,11 +582,11 @@ button {
 /* ---------- Shared app pieces ---------- */
 
 .card {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: linear-gradient(165deg, #1a1d27 0%, #14161f 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 24px;
   padding: 18px;
-  box-shadow: 0 12px 32px -22px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 12px 32px -22px rgba(0, 0, 0, 0.7);
 }
 
 .sec {
@@ -635,7 +644,7 @@ button {
 .pbar {
   height: 7px;
   border-radius: 99px;
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.09);
   overflow: hidden;
 }
 
@@ -647,12 +656,12 @@ button {
 .pbar-fill {
   height: 100%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #fbbf24, #f97316);
+  background: linear-gradient(90deg, var(--audible-soft), var(--audible));
 }
 
 .mini-btn {
   border: none;
-  background: #f2f2f5;
+  background: var(--raise);
   border-radius: 999px;
   padding: 7px 12px;
   font-size: 12px;
@@ -663,8 +672,8 @@ button {
 }
 
 .mini-btn.dark {
-  background: var(--ink);
-  color: #fff;
+  background: linear-gradient(160deg, var(--audible-soft), var(--audible));
+  color: #16181f;
 }
 
 .read-title {
@@ -736,13 +745,13 @@ button {
 
 .streak-pill {
   margin-left: auto;
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 13px;
   font-size: 13.5px;
   font-weight: 700;
-  box-shadow: 0 8px 20px -12px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.5);
 }
 
 .goal-card {
@@ -785,7 +794,7 @@ button {
 }
 
 .goal-chips span {
-  background: #f6f6f8;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 999px;
   padding: 5px 10px;
   font-size: 11.5px;
@@ -803,34 +812,6 @@ button {
 
 .reading-row::-webkit-scrollbar {
   display: none;
-}
-
-.read-card {
-  min-width: 240px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.read-card-top {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.read-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: var(--sub);
-  font-weight: 600;
-  gap: 8px;
-}
-
-.mini-btns {
-  display: flex;
-  gap: 6px;
 }
 
 .bars {
@@ -854,17 +835,17 @@ button {
   width: 100%;
   max-width: 26px;
   border-radius: 8px;
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  background: linear-gradient(180deg, var(--audible-soft), var(--audible));
 }
 
 .bar.zero {
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .bar-label {
   font-size: 10px;
   font-weight: 700;
-  color: #b6b9c1;
+  color: #6d7280;
 }
 
 .done-row {
@@ -939,7 +920,7 @@ button {
 
 .segmentbar {
   display: flex;
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.07);
   border-radius: 999px;
   padding: 4px;
   margin-bottom: 16px;
@@ -965,9 +946,9 @@ button {
 .seg-pill {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: #262a36;
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(16, 17, 20, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .segbtn-label {
@@ -1012,7 +993,7 @@ button {
   border: none;
   background: none;
   font-size: 16px;
-  color: #d9dadf;
+  color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   padding: 1px;
 }
@@ -1024,7 +1005,7 @@ button {
 .del {
   border: none;
   background: none;
-  color: #c6c8cf;
+  color: #6d7280;
   cursor: pointer;
   padding: 4px;
   flex-shrink: 0;
@@ -1101,7 +1082,7 @@ button {
   height: 34px;
   border-radius: 50%;
   border: none;
-  background: #f2f2f5;
+  background: var(--raise);
   font-size: 17px;
   font-weight: 700;
   cursor: pointer;
@@ -1163,7 +1144,8 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #fff;
+  background: #14161f;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 28px 28px 0 0;
   padding: 14px 22px calc(26px + env(safe-area-inset-bottom));
   z-index: 31;
@@ -1173,7 +1155,7 @@ button {
   width: 40px;
   height: 5px;
   border-radius: 99px;
-  background: #e4e5e9;
+  background: rgba(255, 255, 255, 0.16);
   margin: 0 auto 16px;
 }
 
@@ -1202,18 +1184,19 @@ button {
 
 .field input {
   width: 100%;
-  border: 1.5px solid #ececf0;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 13px 14px;
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  background: #fafafa;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .field input:focus {
-  border-color: var(--ink);
-  background: #fff;
+  border-color: var(--audible);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .field-row {
@@ -1254,8 +1237,8 @@ button {
 }
 
 .today-card.done {
-  border-color: #fde68a;
-  background: linear-gradient(120deg, #fffbeb, #fff);
+  border-color: rgba(248, 153, 28, 0.45);
+  background: linear-gradient(120deg, rgba(248, 153, 28, 0.14), #14161f);
 }
 
 .today-emoji {
@@ -1287,13 +1270,13 @@ button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid #f0f0f3;
-  background: #fff;
+  border: 1px solid var(--line);
+  background: var(--card);
   display: grid;
   place-items: center;
   cursor: pointer;
   color: var(--ink);
-  box-shadow: 0 8px 20px -12px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.5);
   z-index: 5;
 }
 
@@ -1315,7 +1298,7 @@ button {
   height: 28px;
   border-radius: 999px;
   border: none;
-  background: #e4e5e9;
+  background: rgba(255, 255, 255, 0.14);
   padding: 3px;
   display: flex;
   justify-content: flex-start;
@@ -1324,7 +1307,7 @@ button {
 }
 
 .switch.on {
-  background: var(--ink);
+  background: var(--audible);
   justify-content: flex-end;
 }
 
@@ -1340,8 +1323,8 @@ button {
   width: 100%;
   height: 50px;
   border-radius: 999px;
-  border: 1.5px solid #ececf0;
-  background: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--ink);
   font-size: 15px;
   font-weight: 700;
@@ -1363,6 +1346,358 @@ button {
 }
 
 .danger.confirm {
-  background: #fef2f2;
+  background: rgba(239, 68, 68, 0.14);
   border-radius: 999px;
+}
+
+/* ---------- Reading player card (Audible-inspired, see DESIGN.md) ---------- */
+
+.player-card {
+  position: relative;
+  flex: 1 0 288px;
+  max-width: 100%;
+  background: linear-gradient(165deg, #191c26 0%, #10121a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 18px;
+  color: #f5f6fa;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 44px -22px rgba(10, 12, 20, 0.65);
+}
+
+.player-glow {
+  position: absolute;
+  top: -55%;
+  left: -15%;
+  width: 70%;
+  height: 90%;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.player-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.player-cover {
+  width: 48px;
+  height: 68px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.92);
+  display: grid;
+  place-items: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 24px;
+  box-shadow: inset 3px 0 6px -2px rgba(0, 0, 0, 0.3), 0 10px 22px -8px rgba(0, 0, 0, 0.7);
+}
+
+.player-meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.player-title {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-author {
+  font-size: 12px;
+  color: var(--player-sub);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player-pct {
+  position: relative;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--audible);
+  font-variant-numeric: tabular-nums;
+  min-width: 44px;
+  text-align: right;
+}
+
+.pop-delta {
+  position: absolute;
+  right: 0;
+  top: -6px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--audible);
+  pointer-events: none;
+}
+
+.pop-delta.neg {
+  color: var(--player-sub);
+}
+
+.player-track {
+  position: relative;
+  height: 10px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.09);
+  margin-top: 2px;
+}
+
+.player-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--audible-soft), var(--audible));
+  box-shadow: 0 0 14px rgba(248, 153, 28, 0.5);
+  overflow: hidden;
+  min-width: 10px;
+}
+
+.player-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 25%, rgba(255, 255, 255, 0.5) 50%, transparent 75%);
+  transform: translateX(-100%);
+  animation: player-shimmer 2.6s linear infinite;
+}
+
+@keyframes player-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.player-knob {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--audible);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(248, 153, 28, 0.7);
+}
+
+.player-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-btn {
+  border: none;
+  background: none;
+  color: var(--player-sub);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 0;
+}
+
+.page-btn:hover {
+  color: #f5f6fa;
+}
+
+.page-btn strong {
+  color: #f5f6fa;
+  font-weight: 800;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.35);
+}
+
+.page-input {
+  width: 76px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--audible);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px;
+  outline: none;
+  font-family: inherit;
+}
+
+.page-input:focus {
+  box-shadow: 0 0 0 2px rgba(248, 153, 28, 0.35);
+}
+
+.time-left {
+  font-size: 11.5px;
+  color: var(--player-sub);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.player-card .step-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.07);
+  color: #f5f6fa;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.player-card .step-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.player-card .step-btn:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.player-card .step-btn.plus {
+  background: linear-gradient(160deg, var(--audible-soft), var(--audible));
+  border: none;
+  color: #16181f;
+  box-shadow: 0 8px 20px -8px rgba(248, 153, 28, 0.8);
+}
+
+.player-card .step-btn.plus:hover:not(:disabled) {
+  background: linear-gradient(160deg, #ffc266, #ffa02e);
+}
+
+.amount-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.amount-input {
+  width: 84px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.14);
+  padding-bottom: 2px;
+  transition: border-color 0.15s;
+}
+
+.amount-input:focus {
+  border-bottom-color: var(--audible);
+}
+
+.amount-label {
+  font-size: 10.5px;
+  color: var(--player-sub);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.player-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.quick-chips {
+  display: flex;
+  gap: 6px;
+}
+
+.quick-chips .chip {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--player-sub);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.15s;
+}
+
+.quick-chips .chip:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #f5f6fa;
+}
+
+.quick-chips .chip.on {
+  background: rgba(248, 153, 28, 0.16);
+  border-color: var(--audible);
+  color: var(--audible);
+}
+
+.finish-btn {
+  background: none;
+  color: var(--audible);
+  border: 1px solid rgba(248, 153, 28, 0.5);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.finish-btn:hover {
+  background: rgba(248, 153, 28, 0.12);
+}
+
+.mini-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.player-card .step-btn:focus-visible,
+.quick-chips .chip:focus-visible,
+.finish-btn:focus-visible,
+.page-btn:focus-visible {
+  outline: 2px solid var(--audible);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player-shimmer {
+    animation: none;
+  }
 }

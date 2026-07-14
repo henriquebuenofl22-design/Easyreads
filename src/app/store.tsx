@@ -11,9 +11,10 @@ type Action =
   | { type: 'reset' }
 
 function addToday(activity: State['activity'], pages: number): State['activity'] {
-  if (pages <= 0) return activity
+  if (pages === 0) return activity
   const k = dateKey(new Date())
-  return { ...activity, [k]: (activity[k] ?? 0) + pages }
+  // negative deltas (taking pages out) roll back today's count, floored at 0
+  return { ...activity, [k]: Math.max(0, (activity[k] ?? 0) + pages) }
 }
 
 function reducer(state: State, action: Action): State {

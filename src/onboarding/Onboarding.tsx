@@ -114,7 +114,7 @@ export default function Onboarding({ onFinish }: { onFinish: (mode: 'signup' | '
             <motion.span
               key={s.key}
               className="dot"
-              animate={{ width: i === index ? 24 : 7, backgroundColor: i === index ? '#101114' : '#d9dadf' }}
+              animate={{ width: i === index ? 24 : 7, backgroundColor: i === index ? '#f8991c' : 'rgba(255,255,255,0.18)' }}
               transition={{ type: 'spring', stiffness: 400, damping: 32 }}
             />
           ))}

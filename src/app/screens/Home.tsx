@@ -37,7 +37,7 @@ export default function Home({ onAdd }: { onAdd: () => void }) {
       <div className="card goal-card">
         <div className="goal-ring">
           <svg width="92" height="92" viewBox="0 0 92 92">
-            <circle cx="46" cy="46" r="38" stroke="#f1f2f5" strokeWidth="9" fill="none" />
+            <circle cx="46" cy="46" r="38" stroke="rgba(255,255,255,0.08)" strokeWidth="9" fill="none" />
             <motion.circle
               cx="46"
               cy="46"

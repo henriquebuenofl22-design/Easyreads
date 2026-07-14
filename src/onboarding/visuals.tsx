@@ -102,9 +102,32 @@ export function StreakVisual() {
   return (
     <div className="streak-visual">
       <div className="flame-orb">
+        <span className="flame-ring">
+          <svg viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="70" stroke="rgba(255,255,255,0.08)" strokeWidth="5" fill="none" />
+            <motion.circle
+              cx="75"
+              cy="75"
+              r="70"
+              stroke="url(#flameGrad)"
+              strokeWidth="5"
+              strokeLinecap="round"
+              fill="none"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 0.8 }}
+              transition={{ delay: 0.2, duration: 1.3, ease: [0.22, 1, 0.36, 1] }}
+            />
+            <defs>
+              <linearGradient id="flameGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stopColor="#fbbf24" />
+                <stop offset="1" stopColor="#ef4444" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
         <motion.span
           className="flame-glow"
-          animate={{ scale: [1, 1.22, 1], opacity: [0.6, 0.25, 0.6] }}
+          animate={{ scale: [1, 1.18, 1], opacity: [0.7, 0.35, 0.7] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.span
@@ -188,7 +211,7 @@ export function GoalVisual() {
               <stop offset="100%" stopColor="#f97316" />
             </linearGradient>
           </defs>
-          <circle cx="105" cy="105" r="88" stroke="#f1f2f5" strokeWidth="17" fill="none" />
+          <circle cx="105" cy="105" r="88" stroke="rgba(255,255,255,0.08)" strokeWidth="17" fill="none" />
           <motion.circle
             cx="105"
             cy="105"

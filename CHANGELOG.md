@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.2.0 — 2026-07-14
+
+### Changed
+- **Tema escuro premium ("Meia-Noite") em todo o app**: fundo carvão profundo com brilho âmbar no topo, cartões de vidro (glass) com desfoque e borda sutil, texto branco de alto contraste com cinzas suaves para hierarquia. O acento passa a ser um único gradiente âmbar→laranja, com o vermelho reservado para o brilho da chama.
+- **Tipografia**: numerais e títulos de destaque agora usam *Space Grotesk*; *Inter* segue no corpo de texto.
+- **Tela de streak do onboarding** redesenhada no estilo "Meia-Noite": anel gradiente luminoso ao redor da chama, pips diários com gradiente e brilho, e o número da sequência em gradiente âmbar.
+- Botões principais (CTA), FAB, pílula de segmento ativa, toggles e barras de progresso adotaram o gradiente âmbar; anéis de meta, gráfico semanal e chips foram ajustados para o fundo escuro.
+- Os três slides do onboarding ganharam brilhos de fundo coloridos por slide (âmbar → laranja → verde) com crossfade suave, além de um orbe de luz que flutua atrás da ilustração.
+
+### Added
+- Animação de transição entre os slides do onboarding: o slide sai com desfoque e leve zoom, o novo entra com mola (spring) na direção correta, e o conteúdo aparece em parallax escalonado (ilustração, título e subtítulo em sequência). Os pontos de paginação agora são clicáveis. A saída do onboarding para o app usa desfoque + zoom com entrada em mola.
+
 ## 0.1.1.0 — 2026-07-10
 
 ### Changed

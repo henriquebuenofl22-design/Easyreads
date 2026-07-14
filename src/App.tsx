@@ -16,7 +16,12 @@ export default function App() {
       <div className="app">
         <AnimatePresence mode="wait">
           {stage === 'onboarding' ? (
-            <motion.div key="onb" className="fill" exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.25 }}>
+            <motion.div
+              key="onb"
+              className="fill"
+              exit={{ opacity: 0, scale: 0.95, filter: 'blur(8px)' }}
+              transition={{ duration: 0.3 }}
+            >
               <Onboarding
                 onFinish={(mode) => {
                   localStorage.setItem(ONBOARDED_KEY, mode)
@@ -28,8 +33,8 @@ export default function App() {
             <motion.div
               key="shell"
               className="fill"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 28, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ type: 'spring', stiffness: 220, damping: 26 }}
             >
               <StoreProvider>

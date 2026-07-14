@@ -1,8 +1,15 @@
 :root {
-  --ink: #101114;
-  --sub: #787c86;
-  --line: #ececf0;
+  --bg: #0b0c10;
+  --ink: #f3f4f7;
+  --sub: #9095a3;
+  --line: rgba(255, 255, 255, 0.09);
+  --card: rgba(255, 255, 255, 0.05);
+  --card-solid: #16181e;
+  --field: rgba(255, 255, 255, 0.04);
   --accent: #f59e0b;
+  --accent-grad: linear-gradient(90deg, #fbbf24, #f97316);
+  --pip-grad: linear-gradient(180deg, #fbbf24, #f97316);
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 * {
@@ -19,7 +26,7 @@ body,
 
 body {
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
-  background: #e9e9ee;
+  background: #050608;
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
   min-height: 100dvh;
@@ -35,7 +42,9 @@ button {
 .app {
   width: min(430px, 100vw);
   height: 100dvh;
-  background: #fff;
+  background:
+    radial-gradient(90% 42% at 50% 8%, rgba(249, 115, 22, 0.14) 0%, rgba(249, 115, 22, 0) 60%),
+    linear-gradient(180deg, #121319 0%, #0b0c10 100%);
   position: relative;
   overflow: hidden;
 }
@@ -44,8 +53,8 @@ button {
   .app {
     height: min(860px, 94dvh);
     border-radius: 40px;
-    border: 1px solid #dcdce2;
-    box-shadow: 0 32px 80px -24px rgba(16, 17, 20, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 32px 90px -24px rgba(0, 0, 0, 0.8);
   }
 }
 
@@ -59,7 +68,40 @@ button {
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(120% 55% at 50% -8%, #fff6e8 0%, #ffffff 60%);
+  background:
+    radial-gradient(90% 42% at 50% 8%, rgba(249, 115, 22, 0.10) 0%, rgba(249, 115, 22, 0) 60%),
+    linear-gradient(180deg, #121319 0%, #0b0c10 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.onb-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.ambient-orb {
+  position: absolute;
+  left: 50%;
+  top: 12%;
+  width: 360px;
+  height: 360px;
+  margin-left: -180px;
+  border-radius: 50%;
+}
+
+.onb-top,
+.onb-body,
+.onb-foot {
+  position: relative;
+  z-index: 1;
 }
 
 .onb-top {
@@ -74,7 +116,7 @@ button {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: #f2f2f5;
+  background: rgba(255, 255, 255, 0.08);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -92,7 +134,7 @@ button {
   height: 4px;
   flex: 1;
   border-radius: 99px;
-  background: var(--line);
+  background: rgba(255, 255, 255, 0.12);
   overflow: hidden;
 }
 
@@ -100,7 +142,7 @@ button {
   height: 100%;
   width: 100%;
   border-radius: 99px;
-  background: var(--ink);
+  background: var(--accent-grad);
   transform-origin: left;
 }
 
@@ -143,12 +185,14 @@ button {
 }
 
 .slide h1 {
+  font-family: var(--font-display);
   font-size: 31px;
-  font-weight: 800;
-  letter-spacing: -0.035em;
+  font-weight: 600;
+  letter-spacing: -0.025em;
   text-align: center;
   line-height: 1.15;
   margin-bottom: 12px;
+  color: #fff;
 }
 
 .slide p {
@@ -181,7 +225,10 @@ button {
   height: 7px;
   width: 7px;
   border-radius: 99px;
-  background: #d9dadf;
+  background: rgba(255, 255, 255, 0.22);
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .cta {
@@ -189,12 +236,21 @@ button {
   height: 56px;
   border-radius: 999px;
   border: none;
-  background: var(--ink);
-  color: #fff;
+  background: var(--accent-grad);
+  color: #1a1204;
   font-size: 16.5px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 12px 28px -10px rgba(16, 17, 20, 0.5);
+  box-shadow: 0 14px 34px -10px rgba(249, 115, 22, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cta-arrow {
+  display: grid;
+  place-items: center;
 }
 
 .cta-col {
@@ -238,7 +294,7 @@ button {
   height: 220px;
   margin: -110px 0 0 -77px;
   border-radius: 8px 14px 14px 8px;
-  box-shadow: 0 24px 48px -16px rgba(16, 17, 20, 0.35);
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.7);
 }
 
 .book-l {
@@ -302,14 +358,15 @@ button {
   position: absolute;
   right: -18px;
   bottom: -6px;
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: rgba(24, 26, 32, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 11px 14px;
   display: flex;
   gap: 10px;
   align-items: center;
-  box-shadow: 0 18px 40px -14px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
   z-index: 2;
 }
 
@@ -327,6 +384,7 @@ button {
   display: block;
   font-size: 13.5px;
   font-weight: 700;
+  color: #fff;
 }
 
 .result-meta {
@@ -345,25 +403,35 @@ button {
 }
 
 .flame-orb {
-  width: 118px;
-  height: 118px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle at 50% 38%, #fff3dc, #ffe4b8);
   display: grid;
   place-items: center;
   position: relative;
 }
 
+.flame-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.flame-ring svg {
+  width: 150px;
+  height: 150px;
+  transform: rotate(-90deg);
+}
+
 .flame-glow {
   position: absolute;
-  inset: -14px;
+  inset: 10px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.45), rgba(239, 68, 68, 0.14) 55%, transparent 72%);
 }
 
 .flame {
-  font-size: 54px;
-  filter: drop-shadow(0 6px 16px rgba(245, 158, 11, 0.55));
+  font-size: 58px;
+  filter: drop-shadow(0 0 22px rgba(249, 115, 22, 0.85));
   z-index: 1;
 }
 
@@ -377,20 +445,25 @@ button {
 }
 
 .streak-num {
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 700;
   letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #fff, #ffd9a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .week-card {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 20px;
   padding: 14px 16px;
   display: flex;
   gap: 10px;
-  box-shadow: 0 16px 36px -18px rgba(16, 17, 20, 0.25);
+  box-shadow: 0 20px 44px -24px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
 }
 
 .day {
@@ -403,7 +476,7 @@ button {
 .day-label {
   font-size: 10.5px;
   font-weight: 700;
-  color: #b6b9c1;
+  color: #6a6e7d;
 }
 
 .day-pip {
@@ -415,16 +488,19 @@ button {
 }
 
 .day-pip.done {
-  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  background: var(--pip-grad);
+  box-shadow: 0 0 16px -2px rgba(249, 115, 22, 0.6);
+  color: #1a1204;
 }
 
 .day-pip.today {
   border: 2px dashed var(--accent);
   font-size: 13px;
+  box-shadow: 0 0 14px -3px rgba(249, 115, 22, 0.5);
 }
 
 .day-pip.future {
-  background: #f3f4f6;
+  background: rgba(255, 255, 255, 0.07);
 }
 
 /* ---------- Slide 3: goal ---------- */
@@ -465,9 +541,11 @@ button {
 }
 
 .ring-num {
-  font-size: 44px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: 46px;
+  font-weight: 700;
   letter-spacing: -0.04em;
+  color: #fff;
 }
 
 .ring-sub {
@@ -485,13 +563,15 @@ button {
 }
 
 .chip {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 14px;
   font-size: 13px;
   font-weight: 600;
-  box-shadow: 0 10px 24px -14px rgba(16, 17, 20, 0.25);
+  color: #d7dae1;
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
 }
 
 /* ---------- App shell ---------- */
@@ -499,7 +579,9 @@ button {
 .shell {
   height: 100%;
   position: relative;
-  background: #fafafa;
+  background:
+    radial-gradient(90% 40% at 50% 6%, rgba(249, 115, 22, 0.10) 0%, rgba(249, 115, 22, 0) 58%),
+    linear-gradient(180deg, #121319 0%, #0b0c10 100%);
   overflow: hidden;
 }
 
@@ -516,9 +598,9 @@ button {
   right: 0;
   bottom: 0;
   height: calc(64px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  border-top: 1px solid #f0f0f3;
+  background: rgba(14, 15, 20, 0.82);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   padding: 0 12px env(safe-area-inset-bottom);
   z-index: 20;
@@ -533,7 +615,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 3px;
-  color: #b0b3bb;
+  color: #636775;
   cursor: pointer;
   font-size: 10.5px;
   font-weight: 700;
@@ -550,7 +632,8 @@ button {
   width: 4px;
   height: 4px;
   border-radius: 99px;
-  background: var(--ink);
+  background: var(--accent);
+  box-shadow: 0 0 8px 1px rgba(249, 115, 22, 0.7);
 }
 
 .fab {
@@ -560,12 +643,12 @@ button {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  background: var(--accent-grad);
+  color: #1a1204;
   border: none;
   display: grid;
   place-items: center;
-  box-shadow: 0 16px 32px -8px rgba(16, 17, 20, 0.5);
+  box-shadow: 0 16px 34px -8px rgba(249, 115, 22, 0.6);
   cursor: pointer;
   z-index: 21;
 }
@@ -573,11 +656,12 @@ button {
 /* ---------- Shared app pieces ---------- */
 
 .card {
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 24px;
   padding: 18px;
-  box-shadow: 0 12px 32px -22px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
 }
 
 .sec {
@@ -588,9 +672,10 @@ button {
 }
 
 .sec h3 {
+  font-family: var(--font-display);
   font-size: 16.5px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .sec span {
@@ -604,12 +689,13 @@ button {
   height: 44px;
   border-radius: 50%;
   background: linear-gradient(160deg, #fbbf24, #f97316);
-  color: #fff;
+  color: #1a1204;
   display: grid;
   place-items: center;
   font-weight: 800;
   font-size: 18px;
   flex-shrink: 0;
+  box-shadow: 0 8px 20px -8px rgba(249, 115, 22, 0.6);
 }
 
 .avatar.big {
@@ -629,13 +715,13 @@ button {
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-size: 22px;
-  box-shadow: inset 3px 0 6px -2px rgba(0, 0, 0, 0.25), 0 6px 14px -6px rgba(16, 17, 20, 0.4);
+  box-shadow: inset 3px 0 6px -2px rgba(0, 0, 0, 0.35), 0 6px 16px -6px rgba(0, 0, 0, 0.7);
 }
 
 .pbar {
   height: 7px;
   border-radius: 99px;
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 }
 
@@ -652,7 +738,7 @@ button {
 
 .mini-btn {
   border: none;
-  background: #f2f2f5;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: 999px;
   padding: 7px 12px;
   font-size: 12px;
@@ -663,14 +749,15 @@ button {
 }
 
 .mini-btn.dark {
-  background: var(--ink);
-  color: #fff;
+  background: var(--accent-grad);
+  color: #1a1204;
 }
 
 .read-title {
   font-size: 14.5px;
   font-weight: 700;
   line-height: 1.25;
+  color: var(--ink);
 }
 
 .read-author {
@@ -693,9 +780,10 @@ button {
 }
 
 .empty h3 {
+  font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .empty p {
@@ -729,20 +817,21 @@ button {
 }
 
 .home-top h2 {
+  font-family: var(--font-display);
   font-size: 19px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .streak-pill {
   margin-left: auto;
-  background: #fff;
-  border: 1px solid #f0f0f3;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 13px;
   font-size: 13.5px;
   font-weight: 700;
-  box-shadow: 0 8px 20px -12px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
 }
 
 .goal-card {
@@ -760,15 +849,18 @@ button {
 
 .goal-ring-num {
   position: absolute;
+  font-family: var(--font-display);
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
+  color: #fff;
 }
 
 .goal-info h3 {
+  font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .goal-info p {
@@ -785,7 +877,7 @@ button {
 }
 
 .goal-chips span {
-  background: #f6f6f8;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 999px;
   padding: 5px 10px;
   font-size: 11.5px;
@@ -855,16 +947,18 @@ button {
   max-width: 26px;
   border-radius: 8px;
   background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  box-shadow: 0 0 14px -4px rgba(249, 115, 22, 0.6);
 }
 
 .bar.zero {
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
 }
 
 .bar-label {
   font-size: 10px;
   font-weight: 700;
-  color: #b6b9c1;
+  color: #6a6e7d;
 }
 
 .done-row {
@@ -887,7 +981,7 @@ button {
   display: flex;
   align-items: flex-end;
   padding: 8px;
-  box-shadow: inset 3px 0 6px -2px rgba(0, 0, 0, 0.25), 0 10px 20px -10px rgba(16, 17, 20, 0.4);
+  box-shadow: inset 3px 0 6px -2px rgba(0, 0, 0, 0.35), 0 10px 24px -10px rgba(0, 0, 0, 0.7);
 }
 
 .done-cover-title {
@@ -926,9 +1020,10 @@ button {
 }
 
 .screen-head h2 {
+  font-family: var(--font-display);
   font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .screen-head span {
@@ -939,7 +1034,7 @@ button {
 
 .segmentbar {
   display: flex;
-  background: #f1f2f5;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 999px;
   padding: 4px;
   margin-bottom: 16px;
@@ -960,15 +1055,15 @@ button {
 }
 
 .segbtn.active {
-  color: var(--ink);
+  color: #1a1204;
 }
 
 .seg-pill {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: var(--accent-grad);
   border-radius: 999px;
-  box-shadow: 0 2px 8px rgba(16, 17, 20, 0.12);
+  box-shadow: 0 4px 14px -4px rgba(249, 115, 22, 0.6);
 }
 
 .segbtn-label {
@@ -1017,7 +1112,7 @@ button {
   border: none;
   background: none;
   font-size: 16px;
-  color: #d9dadf;
+  color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
   padding: 1px;
 }
@@ -1029,7 +1124,7 @@ button {
 .del {
   border: none;
   background: none;
-  color: #c6c8cf;
+  color: #565a67;
   cursor: pointer;
   padding: 4px;
   flex-shrink: 0;
@@ -1048,14 +1143,18 @@ button {
 .name-input {
   border: none;
   background: none;
+  font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   text-align: center;
   letter-spacing: -0.02em;
   color: var(--ink);
   outline: none;
   width: 100%;
-  font-family: inherit;
+}
+
+.name-input::placeholder {
+  color: #565a67;
 }
 
 .member-note {
@@ -1078,8 +1177,9 @@ button {
 
 .stat-num {
   display: block;
+  font-family: var(--font-display);
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
 }
 
@@ -1108,7 +1208,7 @@ button {
   height: 34px;
   border-radius: 50%;
   border: none;
-  background: #f2f2f5;
+  background: rgba(255, 255, 255, 0.08);
   font-size: 17px;
   font-weight: 700;
   cursor: pointer;
@@ -1116,8 +1216,9 @@ button {
 }
 
 .step-val {
+  font-family: var(--font-display);
   font-size: 17px;
-  font-weight: 800;
+  font-weight: 700;
   min-width: 32px;
   text-align: center;
 }
@@ -1138,7 +1239,7 @@ button {
 }
 
 .ach.locked {
-  opacity: 0.38;
+  opacity: 0.34;
   filter: grayscale(1);
 }
 
@@ -1161,7 +1262,7 @@ button {
 .backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(16, 17, 20, 0.45);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 30;
 }
 
@@ -1170,7 +1271,9 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #fff;
+  background: #16181e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
   border-radius: 28px 28px 0 0;
   padding: 14px 22px calc(26px + env(safe-area-inset-bottom));
   z-index: 31;
@@ -1180,14 +1283,15 @@ button {
   width: 40px;
   height: 5px;
   border-radius: 99px;
-  background: #e4e5e9;
+  background: rgba(255, 255, 255, 0.16);
   margin: 0 auto 16px;
 }
 
 .sheet h3 {
+  font-family: var(--font-display);
   font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   margin-bottom: 16px;
 }
 
@@ -1209,18 +1313,23 @@ button {
 
 .field input {
   width: 100%;
-  border: 1.5px solid #ececf0;
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   padding: 13px 14px;
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  background: #fafafa;
+  background: var(--field);
+  color: var(--ink);
+}
+
+.field input::placeholder {
+  color: #565a67;
 }
 
 .field input:focus {
-  border-color: var(--ink);
-  background: #fff;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .field-row {
@@ -1261,8 +1370,8 @@ button {
 }
 
 .today-card.done {
-  border-color: #fde68a;
-  background: linear-gradient(120deg, #fffbeb, #fff);
+  border-color: rgba(249, 115, 22, 0.4);
+  background: linear-gradient(120deg, rgba(249, 115, 22, 0.16), rgba(255, 255, 255, 0.03));
 }
 
 .today-emoji {
@@ -1279,9 +1388,10 @@ button {
 }
 
 .today-pct {
+  font-family: var(--font-display);
   font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--accent);
 }
 
@@ -1294,13 +1404,14 @@ button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid #f0f0f3;
-  background: #fff;
+  border: 1px solid var(--line);
+  background: var(--card);
   display: grid;
   place-items: center;
   cursor: pointer;
   color: var(--ink);
-  box-shadow: 0 8px 20px -12px rgba(16, 17, 20, 0.3);
+  box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
   z-index: 5;
 }
 
@@ -1322,7 +1433,7 @@ button {
   height: 28px;
   border-radius: 999px;
   border: none;
-  background: #e4e5e9;
+  background: rgba(255, 255, 255, 0.12);
   padding: 3px;
   display: flex;
   justify-content: flex-start;
@@ -1331,7 +1442,7 @@ button {
 }
 
 .switch.on {
-  background: var(--ink);
+  background: var(--accent-grad);
   justify-content: flex-end;
 }
 
@@ -1340,15 +1451,15 @@ button {
   height: 22px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(16, 17, 20, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .signout {
   width: 100%;
   height: 50px;
   border-radius: 999px;
-  border: 1.5px solid #ececf0;
-  background: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--ink);
   font-size: 15px;
   font-weight: 700;
@@ -1362,7 +1473,7 @@ button {
 .danger {
   border: none;
   background: none;
-  color: #ef4444;
+  color: #f87171;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -1370,6 +1481,6 @@ button {
 }
 
 .danger.confirm {
-  background: #fef2f2;
+  background: rgba(248, 113, 113, 0.14);
   border-radius: 999px;
 }
